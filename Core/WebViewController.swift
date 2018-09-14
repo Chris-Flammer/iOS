@@ -57,6 +57,7 @@ open class WebViewController: UIViewController {
     
     private lazy var appUrls: AppUrls = AppUrls()
     private lazy var tld = TLD()
+    private lazy var serpSettingsStorage = SerpSettingsStorage()
 
     private var tearDownCount = 0
     
@@ -105,7 +106,7 @@ open class WebViewController: UIViewController {
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
     }
     
-    open func attachWebView(configuration: WKWebViewConfiguration, andLoadUrl url: URL?, consumeCookies: Bool) {
+    open func attachWebView(configuration: WKWebViewConfiguration, andLoadUrl url: URL?) {
         webView = WKWebView(frame: view.bounds, configuration: configuration)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         attachLongPressHandler(webView: webView)
@@ -118,29 +119,12 @@ open class WebViewController: UIViewController {
         webViewContainer.addSubview(webView)
         webEventsDelegate?.attached(webView: webView)
         
-        if consumeCookies {
-            consumeCookiesThenLoadUrl(url)
-        } else if let url = url {
+        if let url = url {
             load(url: url)
         }
 
     }
 
-    private func consumeCookiesThenLoadUrl(_ url: URL?) {
-        webView.configuration.websiteDataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { _ in
-            WebCacheManager.consumeCookies()
-            if let url = url {
-                self.load(url: url)
-            }
-        }
-        
-        if let url = url {
-            progressBar.progress = Constants.minimumProgress
-            webEventsDelegate?.webView(webView, didChangeUrl: url)
-            webEventsDelegate?.webpageDidStartLoading(httpsForced: false)
-        }
-    }
-    
     private func attachLongPressHandler(webView: WKWebView) {
         let handler = WebLongPressGestureRecognizer(target: self, action: #selector(onLongPress(sender:)))
         handler.delegate = self
@@ -410,6 +394,11 @@ extension WebViewController: WKNavigationDelegate {
             return .cancel
         }
 
+        if needsToUpdateDdgUrlSettings(for: url) {
+            reissueDDGWithSettings(for: url)
+            return .cancel
+        }
+
         if !failingUrls.contains(url.host ?? ""),
             navigationAction.isTargettingMainFrame(),
             let upgradeUrl = httpsUpgrade.upgrade(url: url) {
@@ -425,6 +414,20 @@ extension WebViewController: WKNavigationDelegate {
         }
 
         return .cancel
+    }
+
+    private func reissueDDGWithSettings(for url: URL) {
+        var url = url
+        serpSettingsStorage.settings.forEach({
+            url = url.removeParam(name: $0.key)
+            url = url.addParam(name: $0.key, value: $0.value)
+        })
+        load(url: url)
+    }
+
+    private func needsToUpdateDdgUrlSettings(for url: URL) -> Bool {
+        guard appUrls.isDuckDuckGo(url: url) else { return false }
+        return serpSettingsStorage.settingsNeedUpdating(in: url)
     }
 
     private func showErrorNow() {

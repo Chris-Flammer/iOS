@@ -33,16 +33,6 @@ public class WebCacheManager {
         return WKWebsiteDataStore.default()
     }
 
-    public static func consumeCookies() {
-        guard #available(iOS 11, *) else { return }
-
-        let cookieStorage = CookieStorage()
-        for cookie in cookieStorage.cookies {
-            WebCacheManager.dataStore.httpCookieStore.setCookie(cookie)
-        }
-        cookieStorage.clear()
-    }
-
     /**
      Clears the cache of all data, except duckduckgo cookies
      */
@@ -56,12 +46,11 @@ public class WebCacheManager {
 
     @available(iOS 11, *)
     private static func extractAllowedCookiesThenClear(in cookieStore: WKHTTPCookieStore) {
-        let cookieStorage = CookieStorage()
+        let serpSettingsStorage = SerpSettingsStorage()
         cookieStore.getAllCookies { cookies in
             let cookies = cookies.filter({ $0.domain == Constants.cookieDomain })
             for cookie in cookies {
-                cookieStorage.setCookie(cookie)
-
+                serpSettingsStorage.addSetting(name: cookie.name, value: cookie.value)
             }
 
             DispatchQueue.main.async {

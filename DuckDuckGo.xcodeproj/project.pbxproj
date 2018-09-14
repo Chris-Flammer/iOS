@@ -113,8 +113,8 @@
 		857EEB752095FFAC008A005C /* HomeRowInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857EEB742095FFAC008A005C /* HomeRowInstructionsViewController.swift */; };
 		85923C401FD2F8D10097204B /* PrivacyProtectionTrackerNetworksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85923C3F1FD2F8D10097204B /* PrivacyProtectionTrackerNetworksTests.swift */; };
 		859872241F5743D800041CB8 /* FireAnimation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 859872231F5743D800041CB8 /* FireAnimation.xib */; };
-		85A1B3B220C6CD9900C18F15 /* CookieStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A1B3B120C6CD9900C18F15 /* CookieStorage.swift */; };
-		85A1B3B420C6D07100C18F15 /* CookieStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A1B3B320C6D07100C18F15 /* CookieStorageTests.swift */; };
+		85A1B3B220C6CD9900C18F15 /* SerpSettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A1B3B120C6CD9900C18F15 /* SerpSettingsStorage.swift */; };
+		85A1B3B420C6D07100C18F15 /* SerpSettingsStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A1B3B320C6D07100C18F15 /* SerpSettingsStorageTests.swift */; };
 		85A313972028E78A00327D00 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 85A313962028E78A00327D00 /* release_notes.txt */; };
 		85A53ECA200D1FA20010D13F /* SurrogateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A53EC9200D1FA20010D13F /* SurrogateStore.swift */; };
 		85A9C37720DD2DC200073340 /* AddToHomeRowCTAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A9C37620DD2DC200073340 /* AddToHomeRowCTAViewController.swift */; };
@@ -566,8 +566,8 @@
 		859151E81F543C7500F5FB53 /* SimulatorStatusMagiciOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimulatorStatusMagiciOS.framework; path = Carthage/Build/iOS/SimulatorStatusMagiciOS.framework; sourceTree = "<group>"; };
 		85923C3F1FD2F8D10097204B /* PrivacyProtectionTrackerNetworksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyProtectionTrackerNetworksTests.swift; sourceTree = "<group>"; };
 		859872231F5743D800041CB8 /* FireAnimation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FireAnimation.xib; sourceTree = "<group>"; };
-		85A1B3B120C6CD9900C18F15 /* CookieStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieStorage.swift; sourceTree = "<group>"; };
-		85A1B3B320C6D07100C18F15 /* CookieStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieStorageTests.swift; sourceTree = "<group>"; };
+		85A1B3B120C6CD9900C18F15 /* SerpSettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerpSettingsStorage.swift; sourceTree = "<group>"; };
+		85A1B3B320C6D07100C18F15 /* SerpSettingsStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerpSettingsStorageTests.swift; sourceTree = "<group>"; };
 		85A313962028E78A00327D00 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = release_notes.txt; path = fastlane/metadata/default/release_notes.txt; sourceTree = "<group>"; };
 		85A53EC9200D1FA20010D13F /* SurrogateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurrogateStore.swift; sourceTree = "<group>"; };
 		85A9C37620DD2DC200073340 /* AddToHomeRowCTAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToHomeRowCTAViewController.swift; sourceTree = "<group>"; };
@@ -1686,7 +1686,7 @@
 		F143C3311E4A9A6A00CFDE3A /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				85A1B3B120C6CD9900C18F15 /* CookieStorage.swift */,
+				85A1B3B120C6CD9900C18F15 /* SerpSettingsStorage.swift */,
 				F18326861E60542100240060 /* JavascriptLoader.swift */,
 				F1A886771F29394E0096251E /* WebCacheManager.swift */,
 				F159BDA61F0C073D00B4A01D /* WebCacheSummary.swift */,
@@ -1885,7 +1885,7 @@
 			isa = PBXGroup;
 			children = (
 				F198D7971E3A45D90088DA8A /* WKWebViewExtensionTests.swift */,
-				85A1B3B320C6D07100C18F15 /* CookieStorageTests.swift */,
+				85A1B3B320C6D07100C18F15 /* SerpSettingsStorageTests.swift */,
 			);
 			name = Web;
 			sourceTree = "<group>";
@@ -2835,7 +2835,7 @@
 				830C37671F6C4A6200E317A7 /* TermsOfServiceParserTests.swift in Sources */,
 				8341D80A212D616F000514C2 /* HTTPSBloomFilterSpecificationTest.swift in Sources */,
 				F1134ED21F40EF3A00B73467 /* JsonTestDataLoader.swift in Sources */,
-				85A1B3B420C6D07100C18F15 /* CookieStorageTests.swift in Sources */,
+				85A1B3B420C6D07100C18F15 /* SerpSettingsStorageTests.swift in Sources */,
 				85F591251FD1BFAA00746C77 /* DisconnectMeTrackerTests.swift in Sources */,
 				850250B520D80419002199C7 /* AtbAndVariantCleanupTests.swift in Sources */,
 				F17D72391E8B35C6003E8B0E /* AppUrlsTests.swift in Sources */,
@@ -2908,7 +2908,7 @@
 				F1DE785A1E5CD2A70058895A /* UIViewExtension.swift in Sources */,
 				F143C33D1E4A9A9200CFDE3A /* WKWebViewExtension.swift in Sources */,
 				F11E22F61ED31CB600523BC9 /* JsonError.swift in Sources */,
-				85A1B3B220C6CD9900C18F15 /* CookieStorage.swift in Sources */,
+				85A1B3B220C6CD9900C18F15 /* SerpSettingsStorage.swift in Sources */,
 				F1134EB51F40AEEA00B73467 /* StatisticsLoader.swift in Sources */,
 				85C271D11FCF33C8007216B4 /* DetectedTracker.swift in Sources */,
 				F143C3281E4A9A0E00CFDE3A /* StringExtension.swift in Sources */,

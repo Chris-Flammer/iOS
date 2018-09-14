@@ -47,7 +47,7 @@ class TabManager {
         let contentBlocker = ContentBlockerConfigurationUserDefaults()
         let configuration =  WKWebViewConfiguration.persistent()
         let controller = TabViewController.loadFromStoryboard(model: tab, contentBlocker: contentBlocker)
-        controller.attachWebView(configuration: configuration, andLoadUrl: url, consumeCookies: model.isEmpty)
+        controller.attachWebView(configuration: configuration, andLoadUrl: url)
         controller.delegate = delegate
         return controller
     }
